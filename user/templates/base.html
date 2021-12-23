@@ -1,0 +1,18 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>{% block title %} accounts {% endblock title %}</title>
+
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+	<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+	<script src="https://kit.fontawesome.com/c3b2df9771.js" crossorigin="anonymous"></script>
+		{% comment %} {% tailwind_css %} {% endcomment %}
+	</head>
+		<body class="text-gray-900 bg-gray-100 font-body" id="body">
+		   
+                {% block content %}{% endblock content %}
+        </div>
+	</body>
+</html>
