@@ -2,4 +2,6 @@
 {% load account %}
 
 {% user_display user as user_display %}
-<p class="text-center font-lg"><strong class="font-bold">{% trans "Note" %}:</strong> {% blocktrans %}you are already logged in as {{ user_display }}.{% endblocktrans %}</p>
+<p class="text-center font-lg">
+    <strong class="font-bold">{% trans "Note" %}:</strong> 
+    {% blocktrans %}you are already logged in as {{ user_display }}.{% endblocktrans %}</p>

@@ -1,3 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.views import View
+from .models import UserProfile
+from .forms import ProfileEditForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-# Create your views here.
+class ProfileView(LoginRequiredMixin,View):
+    def get(self,request,*args,**kwargs):
+        profile = get_object_or_404(UserProfile,user=request.user)
+        context = {
+            'profile': profile
+         }
+        return render(request,'account/profile.html',context)
+
+class ProfileEdit(LoginRequiredMixin,View):
+    def get(self,request):
+        return render(request,'profile_edit.html')
+
+    def post(self,request,*args,**kwargs):
+        submission = request.POST
+        form = ProfileEditForm(submission)
+
+        if form.is_valid():
+            userprofile = get_object_or_404(UserProfile,user=request.user)
+            if userprofile:
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+
+                return redirect('profile')
+            else:
+                return HttpResponse('U dey mad, Na Your Papa account be that??')
