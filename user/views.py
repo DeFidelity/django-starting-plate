@@ -15,11 +15,15 @@ class ProfileView(LoginRequiredMixin,View):
 
 class ProfileEdit(LoginRequiredMixin,View):
     def get(self,request):
-        return render(request,'profile_edit.html')
+        profile = get_object_or_404(UserProfile,user=request.user)
+        context = {
+            'profile': profile
+         }
+        return render(request,'account/profile-edit.html',context)
 
     def post(self,request,*args,**kwargs):
         submission = request.POST
-        form = ProfileEditForm(submission)
+        form = ProfileEditForm(submission,instance=request.user.profile)
 
         if form.is_valid():
             userprofile = get_object_or_404(UserProfile,user=request.user)

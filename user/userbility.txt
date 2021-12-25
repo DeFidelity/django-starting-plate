@@ -29,4 +29,7 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 install the apps from above
 create superuser
 create google apikey and add through admin panel for google login
-add migrations,
+add migrations
+you can edit templates to taste
+note:
+were using HTMX, Alpine js and Tailwind css for our front-end
