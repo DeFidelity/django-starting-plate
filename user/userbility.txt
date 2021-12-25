@@ -1,16 +1,37 @@
 ** add these to installed app
-1. django-allauth
-2. widget_tweaks
-3. userapp itself
-4. jazzmin **before django.contrib.admin**
+'jazzmin' (before django contrib admin)
+'django.contrib.sites',
+'widget_tweaks',
 
+#all auth
+'allauth',
+'allauth.account',
+'allauth.socialaccount',
+'allauth.socialaccount.providers.google',
 
+** context processors **
+
+    'django.template.context_processors.request',
+
+** AUTH BACKEND
+AUTHENTICATION_BACKENDS = [
+...
+# Needed to login by username in Django admin, regardless of `allauth`
+'django.contrib.auth.backends.ModelBackend',
+
+# `allauth` specific authentication methods, such as login by e-mail
+'allauth.account.auth_backends.AuthenticationBackend',
+...
+]
 ** add these to profile urls.py
 
 path('accounts/', include('allauth.urls')),
 path('accounts/', include('user.urls'))
 
+
+
 **add these to settings.py
+SITE_ID = 1
 
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS =True
 
